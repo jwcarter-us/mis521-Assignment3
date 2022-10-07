@@ -58,9 +58,14 @@ namespace mis521_Assignment3.Controllers
                 return NotFound();
             }
 
-            ActorDetailsVM actorDetailsVM = new ActorDetailsVM();
-            actorDetailsVM.actor = actor;
-            actorDetailsVM.Tweets = new List<ActorTweet>();
+            ActorMoviesVM amVM = new ActorMoviesVM();
+            amVM.Actor = actor;
+
+            var aMovies = await _context.MovieActor.Include(m => m.Movie).Where(m => m.ActorID == id).ToListAsync(); 
+
+            amVM.Movies = aMovies;
+
+            amVM.Tweets = new List<ActorTweet>();
 
             var userClient = new TwitterClient("pUNRyZzf0wX08FTwNQt9EQhVJ", "CzO5SooI4rw1pgvN8QFT1rY55l4bU0j1EG5Lg8nAeZ4Vcm9fwU", "3316033396-TlQjY96c8boGNLnjEWRSwl0gOSIc5B8tB5NgOsX", "VPDnzpSw5aFl3YpFeaDTkwTbeeiB3biYs46u19Xu3X3ZX");
             var searchResponse = await userClient.SearchV2.SearchTweetsAsync(actor.Name);
@@ -72,11 +77,11 @@ namespace mis521_Assignment3.Controllers
                 tweet.TweetText = tweetText.Text;
                 var results = analyzer.PolarityScores(tweet.TweetText);
                 tweet.Sentiment = results.Compound;
-                actorDetailsVM.Tweets.Add(tweet);
+                amVM.Tweets.Add(tweet);
             }
 
 
-            return View(actorDetailsVM);
+            return View(amVM);
         }
 
         // GET: Actors/Create

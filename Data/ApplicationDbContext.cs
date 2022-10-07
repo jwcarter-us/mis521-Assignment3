@@ -12,5 +12,6 @@ namespace mis521_Assignment3.Data
         }
         public DbSet<mis521_Assignment3.Models.Actor> Actor { get; set; }
         public DbSet<mis521_Assignment3.Models.Movie> Movie { get; set; }
+        public DbSet<mis521_Assignment3.Models.MovieActor> MovieActor { get; set; }
     }
 }

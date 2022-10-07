@@ -27,7 +27,6 @@ namespace mis521_Assignment3.Controllers
                     .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
-
                 return NotFound();
             }
             var imageData = movie.Poster;
