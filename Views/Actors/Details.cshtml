@@ -4,21 +4,6 @@
     ViewData["Title"] = "Details";
 }
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-
-
-
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#actortweets').DataTable();
-    });
-</script>
-
-
 <h1>Details</h1>
 
 <div>
@@ -65,7 +50,7 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-<h1>Movies Actor has been in</h1>
+<h1>Movies Actor is in:</h1>
 <table class="table">
     <thead>
         <tr>
@@ -80,7 +65,7 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Details" asp-controller="Movies" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Movie.Title)</a>
+                    <a asp-action="Details" asp-controller="Movies" asp-route-id="@item.Movie.Id">@Html.DisplayFor(modelItem => item.Movie.Title)</a>
                 </td>
             </tr>
         }
